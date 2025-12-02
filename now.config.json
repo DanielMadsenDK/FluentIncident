@@ -1,0 +1,12 @@
+{
+    "scope": "x_1118332_fluentin",
+    "scopeId": "02a00c8253253610030191e0a0490eec",
+    "name": "FluentIncidentApp",
+    "tsconfigPath": "./src/server/tsconfig.json",
+    "accessControls": {
+        "runtimeAccessTracking": "none"
+    },
+    "licensing": {
+        "enforceLicense": "none"
+    }
+}
