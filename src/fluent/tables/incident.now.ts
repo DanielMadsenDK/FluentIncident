@@ -6,11 +6,11 @@ export const x_1118332_fluentin_incident = Table({
     name: 'x_1118332_fluentin_incident',
     label: 'Incident',
     schema: {
-        number: StringColumn({ 
+        number: StringColumn({
             label: 'Number',
             maxLength: 40,
-            read_only: true,
-            default: 'javascript:global.getNextObjNumberPadded();'
+            readOnly: true,
+            default: 'javascript:global.getNextObjNumberPadded();',
         }),
         short_description: StringColumn({
             label: 'Short Description',
@@ -32,6 +32,7 @@ export const x_1118332_fluentin_incident = Table({
                 closed: { label: 'Closed', sequence: 4 },
             },
             default: 'new',
+            dropdown: 'dropdown_with_none',
         }),
         priority: IntegerColumn({
             label: 'Priority',
@@ -42,6 +43,7 @@ export const x_1118332_fluentin_incident = Table({
                 '4': { label: 'Low', sequence: 3 },
             },
             default: '3',
+            dropdown: 'dropdown_with_none',
         }),
         opened_at: DateTimeColumn({
             label: 'Opened At',
@@ -50,20 +52,30 @@ export const x_1118332_fluentin_incident = Table({
         created_by: ReferenceColumn({
             label: 'Created By',
             referenceTable: 'sys_user',
+            attributes: {
+                encode_utf8: false,
+            },
         }),
         resolved_at: DateTimeColumn({
             label: 'Resolved At',
         }),
     },
-    accessible_from: 'public',
-    caller_access: 'tracking',
-    actions: ['create', 'read', 'update', 'delete'],
-    allow_web_service_access: true,
-    auto_number: {
+    accessibleFrom: 'public',
+    callerAccess: 'tracking',
+    actions: ['read', 'update', 'delete', 'create'],
+    allowWebServiceAccess: true,
+    autoNumber: {
         prefix: 'INC',
         number: 1000,
-        number_of_digits: 7
-    }
+        numberOfDigits: 7,
+    },
+    index: [
+        {
+            name: 'index',
+            unique: false,
+            element: 'created_by',
+        },
+    ],
 })
 
 export const x_1118332_fluentin_incident_audit = Table({
@@ -73,7 +85,6 @@ export const x_1118332_fluentin_incident_audit = Table({
         incident: StringColumn({
             label: 'Incident',
             maxLength: 40,
-            reference: 'x_1118332_fluentin_incident',
             mandatory: true,
         }),
         changed_by: StringColumn({
@@ -99,8 +110,8 @@ export const x_1118332_fluentin_incident_audit = Table({
             maxLength: 4000,
         }),
     },
-    accessible_from: 'public',
-    caller_access: 'tracking',
-    actions: ['create', 'read'],
-    allow_web_service_access: true, 
+    accessibleFrom: 'public',
+    callerAccess: 'tracking',
+    actions: ['read', 'create'],
+    allowWebServiceAccess: true,
 })
