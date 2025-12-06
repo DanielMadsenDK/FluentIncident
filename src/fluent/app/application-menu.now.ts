@@ -36,8 +36,7 @@ export const incidents_list_module = Record({
     table: 'sys_app_module',
     data: {
         title: 'All Incidents',
-        name: 'x_1118332_fluentin_incidents_list',
-        table_name: 'x_1118332_fluentin_incident',
+        name: 'x_1118332_fluentin_incident', // This is the table name to link to
         application: fluent_incident_menu.$id,
         active: true,
         link_type: 'LIST',
@@ -56,8 +55,7 @@ export const create_incident_module = Record({
     table: 'sys_app_module',
     data: {
         title: 'Create New Incident',
-        name: 'x_1118332_fluentin_create_incident',
-        table_name: 'x_1118332_fluentin_incident',
+        name: 'x_1118332_fluentin_incident', // This is the table name to link to
         application: fluent_incident_menu.$id,
         active: true,
         link_type: 'NEW',
@@ -77,8 +75,7 @@ export const my_audit_changes_module = Record({
     table: 'sys_app_module',
     data: {
         title: 'My Audit Changes',
-        name: 'x_1118332_fluentin_my_audit_changes',
-        table_name: 'x_1118332_fluentin_incident_audit',
+        name: 'x_1118332_fluentin_incident_audit', // This is the table name to link to
         application: fluent_incident_menu.$id,
         active: true,
         link_type: 'LIST',
@@ -98,11 +95,10 @@ export const incident_manager_page_module = Record({
     table: 'sys_app_module',
     data: {
         title: 'Incident Manager',
-        name: 'x_1118332_fluentin_incident_manager_page',
         application: fluent_incident_menu.$id,
         active: true,
         link_type: 'DIRECT',
-        uri_page: 'x_1118332_fluentin_incident_manager.do',
+        query: 'x_1118332_fluentin_incident_manager.do', // Use query field, not uri_page
         order: 400,
         hint: 'Custom incident management interface',
     }
