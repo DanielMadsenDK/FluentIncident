@@ -35,8 +35,9 @@ export const incidents_list_module = Record({
     $id: Now.ID['fluent_incident.module.incidents_list'],
     table: 'sys_app_module',
     data: {
-        title: 'Incidents',
-        name: 'x_1118332_fluentin_incident',
+        title: 'All Incidents',
+        name: 'x_1118332_fluentin_incidents_list',
+        table_name: 'x_1118332_fluentin_incident',
         application: fluent_incident_menu.$id,
         active: true,
         link_type: 'LIST',
@@ -55,7 +56,8 @@ export const create_incident_module = Record({
     table: 'sys_app_module',
     data: {
         title: 'Create New Incident',
-        name: 'x_1118332_fluentin_incident',
+        name: 'x_1118332_fluentin_create_incident',
+        table_name: 'x_1118332_fluentin_incident',
         application: fluent_incident_menu.$id,
         active: true,
         link_type: 'NEW',
@@ -75,12 +77,33 @@ export const my_audit_changes_module = Record({
     table: 'sys_app_module',
     data: {
         title: 'My Audit Changes',
-        name: 'x_1118332_fluentin_incident_audit',
+        name: 'x_1118332_fluentin_my_audit_changes',
+        table_name: 'x_1118332_fluentin_incident_audit',
         application: fluent_incident_menu.$id,
         active: true,
         link_type: 'LIST',
         filter: 'changed_byDYNAMIC90d1921e5f510100a9ad2572f2b477fe',
         order: 300,
         hint: 'View incident audit changes made by me',
+    }
+})
+
+/**
+ * Incident Manager UI Page Module
+ * 
+ * Navigation module that links to the custom UI page for incident management.
+ */
+export const incident_manager_page_module = Record({
+    $id: Now.ID['fluent_incident.module.incident_manager_page'],
+    table: 'sys_app_module',
+    data: {
+        title: 'Incident Manager',
+        name: 'x_1118332_fluentin_incident_manager_page',
+        application: fluent_incident_menu.$id,
+        active: true,
+        link_type: 'DIRECT',
+        uri_page: 'x_1118332_fluentin_incident_manager.do',
+        order: 400,
+        hint: 'Custom incident management interface',
     }
 })
