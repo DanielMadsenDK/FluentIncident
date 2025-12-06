@@ -124,3 +124,27 @@ export const incident_manager_page_module = Record({
         uncancelable: false,
     },
 })
+
+/**
+ * Audit Viewer UI Page Module
+ *
+ * Navigation module that links to the custom UI page for viewing audit records.
+ */
+export const audit_viewer_page_module = Record({
+    $id: Now.ID['fluent_incident.module.audit_viewer_page'],
+    table: 'sys_app_module',
+    data: {
+        title: 'Audit Viewer',
+        application: fluent_incident_menu.$id,
+        active: true,
+        link_type: 'DIRECT',
+        query: 'x_1118332_fluentin_audit_viewer.do',
+        order: 500,
+        hint: 'View all incident audit records',
+        override_menu_roles: false,
+        require_confirmation: false,
+        sys_domain: 'global',
+        sys_domain_path: '/',
+        uncancelable: false,
+    },
+})
