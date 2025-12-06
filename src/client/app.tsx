@@ -78,7 +78,10 @@ export default function App() {
 
         const query = trimmedQuery.toLowerCase()
         const filtered = incidents.filter((incident) => {
-            const number = typeof incident.number === 'object' ? incident.number.display_value : incident.number
+            const number = 
+                typeof incident.number === 'object' 
+                    ? incident.number.display_value 
+                    : incident.number
             const shortDesc =
                 typeof incident.short_description === 'object'
                     ? incident.short_description.display_value
@@ -87,8 +90,14 @@ export default function App() {
                 typeof incident.description === 'object'
                     ? incident.description.display_value
                     : incident.description
-            const status = typeof incident.status === 'object' ? incident.status.display_value : incident.status
-            const priority = typeof incident.priority === 'object' ? incident.priority.display_value : incident.priority
+            const status = 
+                typeof incident.status === 'object' 
+                    ? incident.status.display_value 
+                    : incident.status
+            const priority = 
+                typeof incident.priority === 'object' 
+                    ? incident.priority.display_value 
+                    : incident.priority
 
             const matches = (
                 (number && String(number).toLowerCase().includes(query)) ||
