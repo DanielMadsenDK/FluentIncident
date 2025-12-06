@@ -74,21 +74,26 @@ export default function App() {
             return incidents
         }
 
-        const query = searchQuery.toLowerCase()
+        const query = searchQuery.toLowerCase().trim()
         return incidents.filter((incident) => {
             const number = typeof incident.number === 'object' ? incident.number.display_value : incident.number
             const shortDesc =
                 typeof incident.short_description === 'object'
                     ? incident.short_description.display_value
                     : incident.short_description
+            const description =
+                typeof incident.description === 'object'
+                    ? incident.description.display_value
+                    : incident.description
             const status = typeof incident.status === 'object' ? incident.status.display_value : incident.status
             const priority = typeof incident.priority === 'object' ? incident.priority.display_value : incident.priority
 
             return (
-                (number && number.toLowerCase().includes(query)) ||
-                (shortDesc && shortDesc.toLowerCase().includes(query)) ||
-                (status && status.toLowerCase().includes(query)) ||
-                (priority && priority.toLowerCase().includes(query))
+                (number && String(number).toLowerCase().includes(query)) ||
+                (shortDesc && String(shortDesc).toLowerCase().includes(query)) ||
+                (description && String(description).toLowerCase().includes(query)) ||
+                (status && String(status).toLowerCase().includes(query)) ||
+                (priority && String(priority).toLowerCase().includes(query))
             )
         })
     }, [incidents, searchQuery])
