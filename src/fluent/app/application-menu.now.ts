@@ -37,7 +37,7 @@ export const incidents_list_module = Record({
     data: {
         title: 'Incidents',
         name: 'x_1118332_fluentin_incident',
-        application: Now.ID['fluent_incident.menu'],
+        application: fluent_incident_menu.$id,
         active: true,
         link_type: 'LIST',
         order: 100,
@@ -56,7 +56,7 @@ export const create_incident_module = Record({
     data: {
         title: 'Create New Incident',
         name: 'x_1118332_fluentin_incident',
-        application: Now.ID['fluent_incident.menu'],
+        application: fluent_incident_menu.$id,
         active: true,
         link_type: 'NEW',
         order: 200,
