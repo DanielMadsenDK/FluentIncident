@@ -63,3 +63,24 @@ export const create_incident_module = Record({
         hint: 'Create a new incident',
     }
 })
+
+/**
+ * My Incident Audit Changes Module
+ * 
+ * Navigation module that displays incident audit records filtered to show
+ * only changes made by the current logged-in user.
+ */
+export const my_audit_changes_module = Record({
+    $id: Now.ID['fluent_incident.module.my_audit_changes'],
+    table: 'sys_app_module',
+    data: {
+        title: 'My Audit Changes',
+        name: 'x_1118332_fluentin_incident_audit',
+        application: fluent_incident_menu.$id,
+        active: true,
+        link_type: 'LIST',
+        filter: 'changed_byDYNAMIC90d1921e5f510100a9ad2572f2b477fe',
+        order: 300,
+        hint: 'View incident audit changes made by me',
+    }
+})
