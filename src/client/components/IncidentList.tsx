@@ -69,6 +69,7 @@ export default function IncidentList({ incidents, onEdit, onRefresh, service }) 
                             <th>Description</th>
                             <th>Status</th>
                             <th>Priority</th>
+                            <th>Created By</th>
                             <th>Opened</th>
                             <th>Actions</th>
                         </tr>
@@ -92,6 +93,10 @@ export default function IncidentList({ incidents, onEdit, onRefresh, service }) 
                                 typeof incident.opened_at === 'object'
                                     ? incident.opened_at.display_value
                                     : incident.opened_at
+                            const createdBy =
+                                typeof incident.created_by === 'object'
+                                    ? incident.created_by.display_value
+                                    : incident.created_by
 
                             return (
                                 <tr key={typeof incident.sys_id === 'object' ? incident.sys_id.value : incident.sys_id}>
@@ -107,6 +112,7 @@ export default function IncidentList({ incidents, onEdit, onRefresh, service }) 
                                             {priority}
                                         </span>
                                     </td>
+                                    <td>{createdBy || 'N/A'}</td>
                                     <td>{openedAt}</td>
                                     <td>
                                         <div className="action-buttons">

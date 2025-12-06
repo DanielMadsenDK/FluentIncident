@@ -2,3 +2,6 @@
 
 // Export application menu and navigation modules
 export * from './app/application-menu.now'
+
+// Export business rules
+export * from './business-rules/set-created-by.now'

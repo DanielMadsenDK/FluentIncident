@@ -17,7 +17,7 @@ export class IncidentService {
         try {
             const searchParams = new URLSearchParams()
             searchParams.set('sysparm_display_value', 'all')
-            searchParams.set('sysparm_fields', 'sys_id,number,short_description,description,status,priority,opened_at')
+            searchParams.set('sysparm_fields', 'sys_id,number,short_description,description,status,priority,opened_at,created_by')
             searchParams.set('sysparm_query', 'ORDERBYDESCopened_at')
 
             const response = await fetch(`/api/now/table/${this.tableName}?${searchParams.toString()}`, {

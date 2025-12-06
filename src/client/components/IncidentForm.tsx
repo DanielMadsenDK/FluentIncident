@@ -10,6 +10,7 @@ export default function IncidentForm({ incident, onSubmit, onCancel }) {
         description: '',
         status: 'new',
         priority: '3',
+        created_by: '',
     })
 
     // Load incident data if editing
@@ -24,12 +25,14 @@ export default function IncidentForm({ incident, onSubmit, onCancel }) {
                 typeof incident.description === 'object' ? incident.description.value : incident.description
             const status = typeof incident.status === 'object' ? incident.status.value : incident.status
             const priority = typeof incident.priority === 'object' ? incident.priority.value : incident.priority
+            const createdBy = typeof incident.created_by === 'object' ? incident.created_by.value : incident.created_by
 
             setFormData({
                 short_description: shortDesc || '',
                 description: description || '',
                 status: status || 'new',
                 priority: priority || '3',
+                created_by: createdBy || '',
             })
         }
     }, [incident])
@@ -103,6 +106,20 @@ export default function IncidentForm({ incident, onSubmit, onCancel }) {
                                 <option value="4">4 - Low</option>
                             </select>
                         </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="created_by">Created By (User sys_id)</label>
+                        <input
+                            type="text"
+                            id="created_by"
+                            name="created_by"
+                            value={formData.created_by}
+                            onChange={handleChange}
+                            placeholder="Auto-populated on create, editable"
+                            maxLength={32}
+                        />
+                        <small className="field-hint">Leave empty to auto-set to current user on create</small>
                     </div>
 
                     <div className="form-actions">

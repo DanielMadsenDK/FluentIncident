@@ -1,5 +1,5 @@
 import '@servicenow/sdk/global'
-import { Table, StringColumn, DateTimeColumn, IntegerColumn } from '@servicenow/sdk/core'
+import { Table, StringColumn, DateTimeColumn, IntegerColumn, ReferenceColumn } from '@servicenow/sdk/core'
 
 // Create the incident table for our application
 export const x_1118332_fluentin_incident = Table({
@@ -46,6 +46,10 @@ export const x_1118332_fluentin_incident = Table({
         opened_at: DateTimeColumn({
             label: 'Opened At',
             default: 'javascript:new GlideDateTime().getDisplayValue();',
+        }),
+        created_by: ReferenceColumn({
+            label: 'Created By',
+            referenceTable: 'sys_user',
         }),
         resolved_at: DateTimeColumn({
             label: 'Resolved At',
