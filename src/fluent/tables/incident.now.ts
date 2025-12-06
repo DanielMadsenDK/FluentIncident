@@ -61,3 +61,42 @@ export const x_1118332_fluentin_incident = Table({
         number_of_digits: 7
     }
 })
+
+export const x_1118332_fluentin_incident_audit = Table({
+    name: 'x_1118332_fluentin_incident_audit',
+    label: 'Incident Audit',
+    schema: {
+        incident: StringColumn({
+            label: 'Incident',
+            maxLength: 40,
+            reference: 'x_1118332_fluentin_incident',
+            mandatory: true,
+        }),
+        changed_by: StringColumn({
+            label: 'Changed By',
+            maxLength: 40,
+            mandatory: true,
+        }),
+        change_date: DateTimeColumn({
+            label: 'Change Date',
+            default: 'javascript:new GlideDateTime().getDisplayValue();',
+        }),
+        field_name: StringColumn({
+            label: 'Field Name',
+            maxLength: 100,
+            mandatory: true,
+        }),
+        old_value: StringColumn({
+            label: 'Old Value',
+            maxLength: 4000,
+        }),
+        new_value: StringColumn({
+            label: 'New Value',
+            maxLength: 4000,
+        }),
+    },
+    accessible_from: 'public',
+    caller_access: 'tracking',
+    actions: ['create', 'read'],
+    allow_web_service_access: true, 
+})
