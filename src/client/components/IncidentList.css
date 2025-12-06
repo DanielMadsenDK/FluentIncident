@@ -3,6 +3,13 @@
     overflow-x: auto;
 }
 
+.results-count {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
 .incident-list table {
     width: 100%;
     border-collapse: collapse;

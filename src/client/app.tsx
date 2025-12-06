@@ -10,6 +10,7 @@ export default function App() {
     const [showForm, setShowForm] = useState(false)
     const [selectedIncident, setSelectedIncident] = useState(null)
     const [error, setError] = useState(null)
+    const [searchQuery, setSearchQuery] = useState('')
 
     const incidentService = useMemo(() => new IncidentService(), [])
 
@@ -68,6 +69,30 @@ export default function App() {
         }
     }
 
+    const filteredIncidents = useMemo(() => {
+        if (!searchQuery.trim()) {
+            return incidents
+        }
+
+        const query = searchQuery.toLowerCase()
+        return incidents.filter((incident) => {
+            const number = typeof incident.number === 'object' ? incident.number.display_value : incident.number
+            const shortDesc =
+                typeof incident.short_description === 'object'
+                    ? incident.short_description.display_value
+                    : incident.short_description
+            const status = typeof incident.status === 'object' ? incident.status.display_value : incident.status
+            const priority = typeof incident.priority === 'object' ? incident.priority.display_value : incident.priority
+
+            return (
+                (number && number.toLowerCase().includes(query)) ||
+                (shortDesc && shortDesc.toLowerCase().includes(query)) ||
+                (status && status.toLowerCase().includes(query)) ||
+                (priority && priority.toLowerCase().includes(query))
+            )
+        })
+    }, [incidents, searchQuery])
+
     return (
         <div className="incident-app">
             <header className="app-header">
@@ -84,11 +109,26 @@ export default function App() {
                 </div>
             )}
 
+            <div className="search-container">
+                <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Search incidents by number, description, status, or priority..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                {searchQuery && (
+                    <button className="clear-search" onClick={() => setSearchQuery('')}>
+                        ×
+                    </button>
+                )}
+            </div>
+
             {loading ? (
                 <div className="loading">Loading...</div>
             ) : (
                 <IncidentList
-                    incidents={incidents}
+                    incidents={filteredIncidents}
                     onEdit={handleEditClick}
                     onRefresh={refreshIncidents}
                     service={incidentService}

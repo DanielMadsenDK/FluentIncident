@@ -58,7 +58,11 @@ export default function IncidentList({ incidents, onEdit, onRefresh, service }) 
             {incidents.length === 0 ? (
                 <div className="no-incidents">No incidents found</div>
             ) : (
-                <table>
+                <>
+                    <div className="results-count">
+                        Showing {incidents.length} incident{incidents.length !== 1 ? 's' : ''}
+                    </div>
+                    <table>
                     <thead>
                         <tr>
                             <th>Number</th>
@@ -127,6 +131,7 @@ export default function IncidentList({ incidents, onEdit, onRefresh, service }) 
                         })}
                     </tbody>
                 </table>
+                </>
             )}
         </div>
     )
