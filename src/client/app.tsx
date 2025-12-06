@@ -70,12 +70,14 @@ export default function App() {
     }
 
     const filteredIncidents = useMemo(() => {
-        if (!searchQuery.trim()) {
+        const trimmedQuery = searchQuery.trim()
+        
+        if (!trimmedQuery) {
             return incidents
         }
 
-        const query = searchQuery.toLowerCase().trim()
-        return incidents.filter((incident) => {
+        const query = trimmedQuery.toLowerCase()
+        const filtered = incidents.filter((incident) => {
             const number = typeof incident.number === 'object' ? incident.number.display_value : incident.number
             const shortDesc =
                 typeof incident.short_description === 'object'
@@ -88,14 +90,19 @@ export default function App() {
             const status = typeof incident.status === 'object' ? incident.status.display_value : incident.status
             const priority = typeof incident.priority === 'object' ? incident.priority.display_value : incident.priority
 
-            return (
+            const matches = (
                 (number && String(number).toLowerCase().includes(query)) ||
                 (shortDesc && String(shortDesc).toLowerCase().includes(query)) ||
                 (description && String(description).toLowerCase().includes(query)) ||
                 (status && String(status).toLowerCase().includes(query)) ||
                 (priority && String(priority).toLowerCase().includes(query))
             )
+            
+            return matches
         })
+        
+        console.log('Search query:', query, 'Total incidents:', incidents.length, 'Filtered:', filtered.length)
+        return filtered
     }, [incidents, searchQuery])
 
     return (
